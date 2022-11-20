@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.belarusianin.common'
+    compileSdk rootProject.compileSdk_version
+
+    defaultConfig {
+        minSdk rootProject.minSdk_version
+        targetSdk rootProject.targetSdk_version
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api "androidx.core:core-ktx:$rootProject.ktx_version"
+    api "androidx.appcompat:appcompat:$rootProject.appCompat_version"
+    api "com.google.android.material:material:$rootProject.material_version"
+    api "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout_version"
+
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle_version"
+
+    /* di */
+    api "io.insert-koin:koin-core:$rootProject.koin_version"
+    api "io.insert-koin:koin-android:$rootProject.koin_version"
+
+    /* navigation */
+    api "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation_version"
+    api "androidx.navigation:navigation-ui-ktx:$rootProject.navigation_version"
+
+    /* Compose */
+    def composeBom = platform "androidx.compose:compose-bom:$rootProject.composeBom_version"
+    api composeBom
+    androidTestImplementation composeBom
+    api "com.google.android.material:compose-theme-adapter:$rootProject.composeThemeAdapter_version"
+    api "androidx.compose.material:material"
+    api "androidx.compose.ui:ui-tooling-preview"
+    debugImplementation "androidx.compose.ui:ui-tooling"
+
+    /* test */
+    testImplementation "junit:junit:$rootProject.junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+}
