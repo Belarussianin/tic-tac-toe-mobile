@@ -1,12 +1,14 @@
-package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewModel
+package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.belarusianin.common.presentation.navigation.NavEvent
 import com.belarusianin.common.presentation.viewmodel.BaseViewModel
 import com.belarusianin.game.core.Player
 import com.belarusianin.game.core.interfaces.ITicTacToe
-import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.model.Cell
+import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.Cell
+import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.ui.TicTacToeFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -59,5 +61,13 @@ class TicTacToeViewModel(
 
     fun restartGame() {
         game.restart()
+    }
+
+    fun onNavigateUpClick() {
+        navigate(NavEvent.Up)
+    }
+
+    fun onSettingsClick() {
+        navigate(NavEvent.To(TicTacToeFragmentDirections.actionTicTacToeFragmentToSettingsFragment()))
     }
 }

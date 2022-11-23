@@ -1,4 +1,4 @@
-package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.model
+package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe
 
 import androidx.annotation.DrawableRes
 import com.belarusianin.game.core.Player

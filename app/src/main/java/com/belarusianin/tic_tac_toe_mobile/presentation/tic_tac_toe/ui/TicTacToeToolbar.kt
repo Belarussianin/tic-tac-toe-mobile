@@ -1,4 +1,4 @@
-package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.view
+package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.ui
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.belarusianin.tic_tac_toe_mobile.R
 
 @Composable
-fun Toolbar(
+fun TicTacToeToolbar(
     title: String = stringResource(id = R.string.app_name),
     navigateUp: (() -> Unit)? = null,
     settingsClick: (() -> Unit)? = null

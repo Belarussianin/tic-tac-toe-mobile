@@ -1,11 +1,11 @@
-package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.view
+package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.ui
 
 import androidx.compose.runtime.collectAsState
 import com.belarusianin.common.presentation.fragment.BaseFragment
 import com.belarusianin.game.core.interfaces.GameStatus
 import com.belarusianin.tic_tac_toe_mobile.R
 import com.belarusianin.tic_tac_toe_mobile.databinding.FragmentTicTacToeBinding
-import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewModel.TicTacToeViewModel
+import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewmodel.TicTacToeViewModel
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
@@ -18,6 +18,13 @@ class TicTacToeFragment :
     private var snackbar: WeakReference<Snackbar>? = null
 
     override fun FragmentTicTacToeBinding.bindUI() {
+        toolbar.setContent {
+            TicTacToeToolbar(
+                title = "",
+                navigateUp = viewModel::onNavigateUpClick,
+                settingsClick = viewModel::onSettingsClick
+            )
+        }
         restartButton.setOnClickListener {
             viewModel.restartGame()
         }
@@ -26,7 +33,7 @@ class TicTacToeFragment :
     override fun TicTacToeViewModel.subscribeUI() {
         binding.gameField.setContent {
             val cellsState = cells.collectAsState()
-            Field(cells = cellsState.value, onCellClick = viewModel::makeMove)
+            TicTacToeField(cells = cellsState.value, onCellClick = viewModel::makeMove)
         }
 
         state.observe(viewLifecycleOwner) { state ->

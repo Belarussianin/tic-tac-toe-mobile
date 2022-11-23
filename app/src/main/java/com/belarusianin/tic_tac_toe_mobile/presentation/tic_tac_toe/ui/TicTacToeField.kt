@@ -1,4 +1,4 @@
-package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.view
+package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -38,11 +38,11 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.belarusianin.game.core.Player
 import com.belarusianin.game.core.interfaces.GameCell
-import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.model.Cell
+import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.Cell
 import com.google.android.material.composethemeadapter.MdcTheme
 
 @Composable
-fun Field(
+fun TicTacToeField(
     cells: List<Cell>,
     modifier: Modifier = Modifier,
     columns: Int = 3,
@@ -151,6 +151,6 @@ fun FieldGrid(
 @Composable
 fun FieldPreview() {
     MdcTheme {
-        Field(cells = List(9) { Cell(GameCell.OccupiedCell(Player.X)) })
+        TicTacToeField(cells = List(9) { Cell(GameCell.OccupiedCell(Player.X)) })
     }
 }

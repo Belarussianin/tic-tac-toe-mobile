@@ -3,7 +3,8 @@ package com.belarusianin.tic_tac_toe_mobile.di.modules
 import com.belarusianin.game.core.TicTacToe
 import com.belarusianin.game.core.interfaces.ITicTacToe
 import com.belarusianin.tic_tac_toe_mobile.presentation.main.viewmodel.MainViewModel
-import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewModel.TicTacToeViewModel
+import com.belarusianin.tic_tac_toe_mobile.presentation.settings.viewmodel.SettingsViewModel
+import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewmodel.TicTacToeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,4 +13,5 @@ val appModule = module {
 
     viewModel { MainViewModel() }
     viewModel { TicTacToeViewModel(get()) }
+    viewModel { SettingsViewModel() }
 }

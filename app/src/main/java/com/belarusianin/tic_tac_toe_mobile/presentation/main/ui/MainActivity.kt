@@ -1,4 +1,4 @@
-package com.belarusianin.tic_tac_toe_mobile.presentation.main.view
+package com.belarusianin.tic_tac_toe_mobile.presentation.main.ui
 
 import com.belarusianin.tic_tac_toe_mobile.databinding.ActivityMainBinding
 import com.belarusianin.common.presentation.BaseActivity
