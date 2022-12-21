@@ -65,6 +65,12 @@ dependencies {
     api "androidx.compose.ui:ui-tooling-preview"
     debugImplementation "androidx.compose.ui:ui-tooling"
 
+    /* SplashScreen */
+    api "androidx.core:core-splashscreen:$rootProject.splashScreen_version"
+
+    /* DataStore */
+    api "androidx.datastore:datastore-preferences:$rootProject.preferences_version"
+
     /* test */
     testImplementation "junit:junit:$rootProject.junit_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"

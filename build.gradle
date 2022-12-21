@@ -1,4 +1,3 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
         compileSdk_version = 33
@@ -17,6 +16,8 @@ buildscript {
         navigation_version = '2.5.3'
         composeBom_version = '2022.11.00'
         composeThemeAdapter_version = '1.1.21'
+        splashScreen_version = '1.0.0'
+        preferences_version = '1.0.0'
 
         junit_version = '4.13.2'
         testExtJunit = '1.1.4'

@@ -10,4 +10,12 @@ class SettingsFragment :
 
     override val viewModel by viewModel<SettingsViewModel>()
 
+    override fun FragmentSettingsBinding.bindUI() {
+        toolbar.setContent {
+            SettingsToolbar(navigateUp = viewModel::onNavigateUpClick)
+        }
+        content.setContent {
+            SettingsContent(viewModel = viewModel)
+        }
+    }
 }

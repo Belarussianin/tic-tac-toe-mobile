@@ -30,7 +30,7 @@ class TicTacToeViewModel(
     private val _cells = MutableStateFlow<List<Cell>>(emptyList())
     val cells = _cells.asStateFlow()
 
-    val state = game.status.asLiveData()
+    val state = game.status
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

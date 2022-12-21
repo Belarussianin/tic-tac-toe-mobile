@@ -9,6 +9,6 @@
     <string name="arrow_back">Arrow back</string>
     <string name="play_button_text">Play</string>
     <string name="exit_button_text">Exit</string>
-    <string name="settings_button_text">Settings</string>
+    <string name="settings_button_text">@string/settings</string>
 
 </resources>

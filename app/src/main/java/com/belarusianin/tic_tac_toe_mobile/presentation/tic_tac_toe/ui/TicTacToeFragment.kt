@@ -1,6 +1,8 @@
 package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.ui
 
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import com.belarusianin.common.presentation.fragment.BaseFragment
 import com.belarusianin.game.core.interfaces.GameStatus
 import com.belarusianin.tic_tac_toe_mobile.R
@@ -32,13 +34,14 @@ class TicTacToeFragment :
 
     override fun TicTacToeViewModel.subscribeUI() {
         binding.gameField.setContent {
+            val gameState = state.collectAsState()
             val cellsState = cells.collectAsState()
-            TicTacToeField(cells = cellsState.value, onCellClick = viewModel::makeMove)
-        }
-
-        state.observe(viewLifecycleOwner) { state ->
-            //TODO: debug only
-            // stateChangedNotification(state)
+            val isGameActive = gameState.value is GameStatus.Started
+            TicTacToeField(
+                cells = cellsState.value,
+                modifier = Modifier.alpha(if (isGameActive) 1.0f else 0.5f),
+                onCellClick = viewModel::makeMove
+            )
         }
 
         xScore.observe(viewLifecycleOwner) { xWinsCounter ->
