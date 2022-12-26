@@ -1,21 +1,43 @@
 package com.belarusianin.tic_tac_toe_mobile.presentation.settings.ui
 
-import com.belarusianin.common.presentation.fragment.BaseFragment
-import com.belarusianin.tic_tac_toe_mobile.databinding.FragmentSettingsBinding
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import com.belarusianin.common.presentation.fragment.ComposeFragment
 import com.belarusianin.tic_tac_toe_mobile.presentation.settings.viewmodel.SettingsViewModel
+import com.google.android.material.composethemeadapter.MdcTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsFragment :
-    BaseFragment<FragmentSettingsBinding, SettingsViewModel>(FragmentSettingsBinding::inflate) {
+class SettingsFragment : ComposeFragment<SettingsViewModel>() {
 
     override val viewModel by viewModel<SettingsViewModel>()
 
-    override fun FragmentSettingsBinding.bindUI() {
-        toolbar.setContent {
-            SettingsToolbar(navigateUp = viewModel::onNavigateUpClick)
-        }
-        content.setContent {
-            SettingsContent(viewModel = viewModel)
+    @Composable
+    override fun Content() {
+        val darkThemeSettings = viewModel.isDarkTheme.collectAsState(initial = null)
+        SettingsFragmentContent(
+            viewModel::onNavigateUpClick,
+            darkThemeSettings.value,
+            viewModel::onDarkThemePreferencesChanged
+        )
+    }
+}
+
+@Composable
+fun SettingsFragmentContent(
+    onNavigateUp: (() -> Unit)? = null,
+    isDarkTheme: Boolean? = null,
+    onDarkThemeSettingChange: ((Boolean) -> Unit)? = null
+) {
+    MdcTheme {
+        Column {
+            SettingsToolbar(
+                navigateUp = onNavigateUp
+            )
+            SettingsContent(
+                isDarkTheme = isDarkTheme,
+                onDarkThemeSettingChange = onDarkThemeSettingChange
+            )
         }
     }
 }

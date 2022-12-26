@@ -8,20 +8,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.belarusianin.common.presentation.component.LoadingScreen
-import com.belarusianin.tic_tac_toe_mobile.presentation.settings.viewmodel.SettingsViewModel
 
 @Composable
 fun SettingsContent(
-    viewModel: SettingsViewModel
+    isDarkTheme: Boolean? = null,
+    onDarkThemeSettingChange: ((Boolean) -> Unit)? = null
 ) {
-    val darkThemeSetting = viewModel.isDarkTheme.collectAsState(initial = null)
-
-    when (val isDarkTheme = darkThemeSetting.value) {
+    when (isDarkTheme) {
         null -> LoadingScreen()
         else -> {
             Column(
@@ -37,7 +34,7 @@ fun SettingsContent(
                     Text(text = "Theme: ${if (isDarkTheme) "Dark" else "Light"}")
                     Switch(
                         checked = isDarkTheme,
-                        onCheckedChange = viewModel::onDarkThemePreferencesChanged
+                        onCheckedChange = onDarkThemeSettingChange
                     )
                 }
             }

@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import com.belarusianin.common.presentation.navigation.NavigationObserver
 import com.belarusianin.common.presentation.viewmodel.BaseViewModel
 
-abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
-    private val inflate: (LayoutInflater, ViewGroup?, Boolean) -> Binding
-) : Fragment() {
+abstract class ComposeFragment<ViewModel : BaseViewModel> : Fragment() {
 
-    private var _binding: Binding? = null
-    protected val binding: Binding get() = _binding!!
-
+    private var _composeView: ComposeView? = null
+    protected val composeView: ComposeView get() = _composeView!!
     protected abstract val viewModel: ViewModel
     protected open val navObserver by lazy { NavigationObserver(viewModel) }
 
@@ -25,23 +23,24 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflate.invoke(inflater, container, false).apply { _binding = this }.root
+    ): View = ComposeView(requireContext()).also {
+        _composeView = it
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.bindUI()
-        viewModel.subscribeUI()
+        composeView.setContent {
+            Content()
+        }
     }
 
-    protected open fun Binding.bindUI() {}
-
-    protected open fun ViewModel.subscribeUI() {}
+    @Composable
+    protected open fun Content() {}
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _composeView = null
     }
 }

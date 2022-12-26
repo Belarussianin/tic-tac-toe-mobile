@@ -29,7 +29,6 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.belarusianin.tic_tac_toe_mobile.presentation.settings.ui.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+        android:label="SettingsFragment" />
 
 </navigation>

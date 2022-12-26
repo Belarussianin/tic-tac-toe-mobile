@@ -8,6 +8,7 @@ import com.belarusianin.game.core.interfaces.GameStatus
 import com.belarusianin.tic_tac_toe_mobile.R
 import com.belarusianin.tic_tac_toe_mobile.databinding.FragmentTicTacToeBinding
 import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewmodel.TicTacToeViewModel
+import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
@@ -21,11 +22,13 @@ class TicTacToeFragment :
 
     override fun FragmentTicTacToeBinding.bindUI() {
         toolbar.setContent {
-            TicTacToeToolbar(
-                title = "",
-                navigateUp = viewModel::onNavigateUpClick,
-                settingsClick = viewModel::onSettingsClick
-            )
+            MdcTheme {
+                TicTacToeToolbar(
+                    title = "",
+                    navigateUp = viewModel::onNavigateUpClick,
+                    settingsClick = viewModel::onSettingsClick
+                )
+            }
         }
         restartButton.setOnClickListener {
             viewModel.restartGame()
@@ -37,11 +40,13 @@ class TicTacToeFragment :
             val gameState = state.collectAsState()
             val cellsState = cells.collectAsState()
             val isGameActive = gameState.value is GameStatus.Started
-            TicTacToeField(
-                cells = cellsState.value,
-                modifier = Modifier.alpha(if (isGameActive) 1.0f else 0.5f),
-                onCellClick = viewModel::makeMove
-            )
+            MdcTheme {
+                TicTacToeField(
+                    cells = cellsState.value,
+                    modifier = Modifier.alpha(if (isGameActive) 1.0f else 0.5f),
+                    onCellClick = viewModel::makeMove
+                )
+            }
         }
 
         xScore.observe(viewLifecycleOwner) { xWinsCounter ->
