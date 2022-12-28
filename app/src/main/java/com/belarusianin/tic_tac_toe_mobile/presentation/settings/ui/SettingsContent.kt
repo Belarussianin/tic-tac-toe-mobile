@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.belarusianin.common.presentation.component.LoadingScreen
 
@@ -31,7 +32,10 @@ fun SettingsContent(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Start
                 ) {
-                    Text(text = "Theme: ${if (isDarkTheme) "Dark" else "Light"}")
+                    Text(
+                        text = "Theme: ${if (isDarkTheme) "Dark" else "Light"}",
+                        color = Color.Black
+                    )
                     Switch(
                         checked = isDarkTheme,
                         onCheckedChange = onDarkThemeSettingChange

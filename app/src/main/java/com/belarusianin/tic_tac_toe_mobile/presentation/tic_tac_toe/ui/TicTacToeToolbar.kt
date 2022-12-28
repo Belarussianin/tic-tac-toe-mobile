@@ -49,6 +49,7 @@ fun TicTacToeToolbar(
             }
         },
         backgroundColor = Color.Transparent,
+        contentColor = Color.Black,
         elevation = 1.dp
     )
 }

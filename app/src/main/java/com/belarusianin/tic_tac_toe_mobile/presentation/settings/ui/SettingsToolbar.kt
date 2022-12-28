@@ -37,6 +37,7 @@ fun SettingsToolbar(
             }
         } else null,
         backgroundColor = Color.Transparent,
+        contentColor = Color.Black,
         elevation = 1.dp
     )
 }
