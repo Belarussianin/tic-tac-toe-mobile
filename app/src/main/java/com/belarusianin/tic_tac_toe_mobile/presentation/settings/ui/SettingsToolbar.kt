@@ -21,6 +21,7 @@ fun SettingsToolbar(
     TopAppBar(
         title = {
             Text(
+                color = Color.Black,
                 text = title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis

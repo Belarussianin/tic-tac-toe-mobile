@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.belarusianin.common.presentation.fragment.ComposeFragment
 import com.belarusianin.tic_tac_toe_mobile.presentation.settings.viewmodel.SettingsViewModel
-import com.google.android.material.composethemeadapter.MdcTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : ComposeFragment<SettingsViewModel>() {
@@ -29,15 +28,13 @@ fun SettingsFragmentContent(
     isDarkTheme: Boolean? = null,
     onDarkThemeSettingChange: ((Boolean) -> Unit)? = null
 ) {
-    MdcTheme {
-        Column {
-            SettingsToolbar(
-                navigateUp = onNavigateUp
-            )
-            SettingsContent(
-                isDarkTheme = isDarkTheme,
-                onDarkThemeSettingChange = onDarkThemeSettingChange
-            )
-        }
+    Column {
+        SettingsToolbar(
+            navigateUp = onNavigateUp
+        )
+        SettingsContent(
+            isDarkTheme = isDarkTheme,
+            onDarkThemeSettingChange = onDarkThemeSettingChange
+        )
     }
 }

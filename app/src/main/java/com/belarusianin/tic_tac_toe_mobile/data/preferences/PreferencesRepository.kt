@@ -1,6 +1,5 @@
 package com.belarusianin.tic_tac_toe_mobile.data.preferences
 
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
@@ -22,7 +21,6 @@ abstract class PreferencesRepository<T>(
         .catch { exception ->
             // dataStore.data throws an IOException when an error is encountered when reading data
             if (exception is IOException) {
-                Log.e(TAG, "Error reading preferences.", exception)
                 emit(emptyPreferences())
             } else {
                 throw exception

@@ -1,6 +1,5 @@
 package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.belarusianin.common.presentation.navigation.NavEvent
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class TicTacToeViewModel(
     private val game: ITicTacToe
@@ -45,9 +43,6 @@ class TicTacToeViewModel(
         }
         viewModelScope.launch(Dispatchers.IO) {
             game.field.state.map { lists ->
-                withContext(Dispatchers.Main) {
-                    Log.d("MAIN", "cells:\n${lists.joinToString("\n")}")
-                }
                 lists.flatten().map { Cell(it) }
             }.onEach {
                 _cells.value = it
