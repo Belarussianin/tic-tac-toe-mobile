@@ -12,6 +12,8 @@ import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
+import kotlin.Int
+import kotlin.getValue
 
 class TicTacToeFragment :
     BaseFragment<FragmentTicTacToeBinding, TicTacToeViewModel>(FragmentTicTacToeBinding::inflate) {
@@ -48,16 +50,12 @@ class TicTacToeFragment :
                 )
             }
         }
-
-        xScore.observe(viewLifecycleOwner) { xWinsCounter ->
-            updateWinStates(xWinsCounter = xWinsCounter)
-        }
-
-        oScore.observe(viewLifecycleOwner) { oWinsCounter ->
-            updateWinStates(oWinsCounter = oWinsCounter)
-        }
+        xScore.observe(viewLifecycleOwner, ::updateXWinsCounter)
+        oScore.observe(viewLifecycleOwner, ::updateOWinsCounter)
     }
 
+    /** For future features with popup window in the centre of a screen
+     *
     private fun stateChangedNotification(state: GameStatus) {
         snackbar?.clear()
         snackbar = WeakReference(
@@ -67,14 +65,16 @@ class TicTacToeFragment :
             }
         )
     }
+     */
 
-    private fun updateWinStates(xWinsCounter: Int? = null, oWinsCounter: Int? = null) {
-        xWinsCounter?.let { counter ->
-            binding.xWinsCounter.text = resources.getString(R.string.x_wins_counter_text, counter)
-        }
-        oWinsCounter?.let { counter ->
-            binding.oWinsCounter.text = resources.getString(R.string.o_wins_counter_text, counter)
-        }
+    private fun updateXWinsCounter(value: Int) {
+        val newText = resources.getString(R.string.x_wins_counter_text, value)
+        binding.xWinsCounter.text = newText
+    }
+
+    private fun updateOWinsCounter(value: Int) {
+        val newText = resources.getString(R.string.o_wins_counter_text, value)
+        binding.oWinsCounter.text = newText
     }
 
     override fun onStop() {
