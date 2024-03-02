@@ -11,7 +11,9 @@ import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -151,6 +153,11 @@ fun FieldGrid(
 @Composable
 fun FieldPreview() {
     MdcTheme {
-        TicTacToeField(cells = List(9) { Cell(GameCell.OccupiedCell(Player.X)) })
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            TicTacToeField(cells = List(9) { Cell(GameCell.OccupiedCell(Player.X)) })
+        }
     }
 }
