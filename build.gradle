@@ -2,7 +2,7 @@ buildscript {
     ext {
         compileSdk_version = 33
         minSdk_version = 21
-        targetSdk_version = 32
+        targetSdk_version = 33
 
         gradle_version = '8.2.2'
         compose_version = '1.3.2'
