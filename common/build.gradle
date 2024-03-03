@@ -31,11 +31,11 @@ android {
         kotlinCompilerExtensionVersion compose_version
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 }
 
@@ -60,7 +60,8 @@ dependencies {
     def composeBom = platform "androidx.compose:compose-bom:$rootProject.composeBom_version"
     api composeBom
     androidTestImplementation composeBom
-    api "com.google.android.material:compose-theme-adapter:$rootProject.composeThemeAdapter_version"
+    //DEPRECATED api "com.google.android.material:compose-theme-adapter:$rootProject.composeThemeAdapter_version"
+    api "com.google.accompanist:accompanist-themeadapter-material:0.35.0-alpha"
     api "androidx.compose.material:material"
     api "androidx.compose.ui:ui-tooling-preview"
     debugImplementation "androidx.compose.ui:ui-tooling"

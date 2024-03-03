@@ -8,7 +8,7 @@ import com.belarusianin.game.core.interfaces.GameStatus
 import com.belarusianin.tic_tac_toe_mobile.R
 import com.belarusianin.tic_tac_toe_mobile.databinding.FragmentTicTacToeBinding
 import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewmodel.TicTacToeViewModel
-import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference

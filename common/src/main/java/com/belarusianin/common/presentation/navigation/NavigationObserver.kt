@@ -5,9 +5,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.belarusianin.common.presentation.viewmodel.BaseViewModel
+import kotlinx.coroutines.launch
 
 class NavigationObserver(
     val viewModel: BaseViewModel,
@@ -23,13 +26,15 @@ class NavigationObserver(
         savedInstanceState: Bundle?
     ) {
         super.onFragmentViewCreated(fragmentManager, fragment, view, savedInstanceState)
-        fragment.lifecycleScope.launchWhenStarted {
-            viewModel.navEventFlow.collect { event ->
-                when (event) {
-                    is NavEvent.To -> navigateTo(event, fragment)
-                    NavEvent.Up -> navigateUp(fragment)
-                    NavEvent.Back -> navigateBack(fragment)
-                    NavEvent.BackToRoot -> navigateBackToRoot(fragment)
+        fragment.viewLifecycleOwner.lifecycleScope.launch {
+            fragment.viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.navEventFlow.collect { event ->
+                    when (event) {
+                        is NavEvent.To -> navigateTo(event, fragment)
+                        NavEvent.Up -> navigateUp(fragment)
+                        NavEvent.Back -> navigateBack(fragment)
+                        NavEvent.BackToRoot -> navigateBackToRoot(fragment)
+                    }
                 }
             }
         }

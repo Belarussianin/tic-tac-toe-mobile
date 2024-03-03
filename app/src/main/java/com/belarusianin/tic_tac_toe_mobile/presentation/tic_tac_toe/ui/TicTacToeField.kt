@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -29,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.belarusianin.game.core.Player
 import com.belarusianin.game.core.interfaces.GameCell
 import com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.Cell
-import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.accompanist.themeadapter.material.MdcTheme
 
 @Composable
 fun TicTacToeField(
@@ -62,11 +63,12 @@ private fun CellItem(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
+    val mutableInteractionSource = remember { MutableInteractionSource() }
     Box(
         modifier
             .aspectRatio(1f)
             .clickable(
-                interactionSource = MutableInteractionSource(),
+                interactionSource = mutableInteractionSource,
                 indication = null,
                 onClick = onClick
             )
