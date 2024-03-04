@@ -70,6 +70,7 @@ private fun CellItem(
             .clickable(
                 interactionSource = mutableInteractionSource,
                 indication = null,
+                enabled = cell.isEmpty(),
                 onClick = onClick
             )
     ) {

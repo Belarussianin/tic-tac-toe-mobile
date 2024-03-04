@@ -45,15 +45,16 @@ class TicTacToe(
     override fun makeMove(rowIndex: Int, columnIndex: Int): Boolean {
         return when (_status.value) {
             GameStatus.Started -> {
-                field.set(
+                val currentPlayer = _currentPlayer.value
+                val isSuccessful = field.set(
                     rowIndex,
                     columnIndex,
-                    GameCell.OccupiedCell(_currentPlayer.getAndUpdate { !it })
+                    GameCell.OccupiedCell(currentPlayer)
                 )
+                if (isSuccessful) _currentPlayer.update { !currentPlayer }
                 statusUpdate()
                 true
             }
-
             GameStatus.Draw -> false
             is GameStatus.Win -> false
         }
