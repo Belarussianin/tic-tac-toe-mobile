@@ -1,6 +1,5 @@
 package com.belarusianin.tic_tac_toe_mobile.presentation.tic_tac_toe.viewmodel
 
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.belarusianin.common.presentation.navigation.NavEvent
 import com.belarusianin.common.presentation.viewmodel.BaseViewModel
@@ -21,9 +20,11 @@ class TicTacToeViewModel(
 ) : BaseViewModel() {
 
     private val _xScore = MutableStateFlow(0)
-    val xScore = _xScore.asLiveData()
+    val xScore = _xScore.asStateFlow()
     private val _oScore = MutableStateFlow(0)
-    val oScore = _oScore.asLiveData()
+    val oScore = _oScore.asStateFlow()
+    private val _drawScore = MutableStateFlow(0)
+    val drawScore = _drawScore.asStateFlow()
 
     private val _cells = MutableStateFlow<List<Cell>>(emptyList())
     val cells = _cells.asStateFlow()
@@ -31,15 +32,14 @@ class TicTacToeViewModel(
     val state = game.status
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            game.score.state.map { it[Player.X] ?: 0 }.onEach {
-                _xScore.value = it
-            }.collect()
+        subscribeToScore(Player.X) {
+            _xScore.value = it
         }
-        viewModelScope.launch(Dispatchers.IO) {
-            game.score.state.map { it[Player.O] ?: 0 }.onEach {
-                _oScore.value = it
-            }.collect()
+        subscribeToScore(Player.O) {
+            _oScore.value = it
+        }
+        subscribeToScore(Player.None) {
+            _drawScore.value = it
         }
         viewModelScope.launch(Dispatchers.IO) {
             game.field.state.map { lists ->
@@ -47,6 +47,12 @@ class TicTacToeViewModel(
             }.onEach {
                 _cells.value = it
             }.collect()
+        }
+    }
+
+    private fun subscribeToScore(player: Player, actionOnEach: suspend (Int) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            game.score.state.map { it[player] ?: 0 }.onEach(actionOnEach).collect()
         }
     }
 

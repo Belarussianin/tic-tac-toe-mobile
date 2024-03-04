@@ -1,15 +1,15 @@
 package com.belarusianin.game.core
 
-enum class Player {
-    X, O;
+sealed interface Player {
+    data object All : Player
+    data object None : Player
+    data object X : Player
+    data object O : Player
 
     operator fun not() = when (this) {
+        All -> None
+        None -> All
         X -> O
         O -> X
-    }
-
-    override fun toString(): String = when (this) {
-        O -> "O"
-        X -> "X"
     }
 }

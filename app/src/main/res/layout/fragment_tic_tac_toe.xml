@@ -13,32 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/x_wins_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="false"
-        android:text="@string/x_wins_counter_text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/game_field"
-        app:layout_constraintEnd_toStartOf="@+id/o_wins_counter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/o_wins_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="false"
-        android:text="@string/o_wins_counter_text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/game_field"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/x_wins_counter"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0" />
-
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/game_field"
         android:layout_width="wrap_content"

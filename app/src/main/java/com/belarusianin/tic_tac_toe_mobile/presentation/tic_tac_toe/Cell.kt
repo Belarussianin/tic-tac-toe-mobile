@@ -14,6 +14,7 @@ data class Cell(
         is GameCell.OccupiedCell -> when (gameCell.player) {
             Player.X -> R.drawable.ic_x_48
             Player.O -> R.drawable.ic_o_48
+            else -> 0
         }
     }
 

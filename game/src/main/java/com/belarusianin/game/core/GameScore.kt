@@ -20,4 +20,8 @@ class GameScore(
     override fun set(player: Player, score: Int) {
         _state.update { it.plus(player to score) }
     }
+
+    override fun inc(player: Player) {
+        _state.update { it.plus(player to (_state.value[player]?.plus(1) ?: 1)) }
+    }
 }

@@ -8,9 +8,14 @@ interface IGameScore {
     val state: StateFlow<Map<Player, Int>>
 
     fun reset()
+
     fun set(player: Player, score: Int)
 
+    fun inc(player: Player)
+
     companion object {
-        fun getStandardScoreState() = mapOf(Player.X to 0, Player.O to 0)
+        fun getStandardScoreState() = mapOf(
+            Player.All to 0, Player.None to 0, Player.X to 0, Player.O to 0
+        )
     }
 }

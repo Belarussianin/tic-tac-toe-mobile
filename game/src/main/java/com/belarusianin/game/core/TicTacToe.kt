@@ -53,6 +53,7 @@ class TicTacToe(
                 statusUpdate()
                 true
             }
+
             GameStatus.Draw -> false
             is GameStatus.Win -> false
         }
@@ -61,23 +62,23 @@ class TicTacToe(
     private fun statusUpdate() {
         _status.getAndUpdate { checkForDraw() ?: checkForWin() ?: it }
         when (val newStatus = _status.value) {
-            is GameStatus.Win -> score.set(
-                newStatus.player,
-                (score.state.value[newStatus.player] ?: 0) + 1
-            )
+            is GameStatus.Win -> score.inc(newStatus.player)
+            is GameStatus.Draw -> score.inc(Player.None)
             else -> {}
         }
     }
 
-    private fun checkForWin(cells: List<GameCell>): GameStatus.Win? {
+    private fun checkForWin(row: List<GameCell>): GameStatus.Win? {
         return when {
-            cells.any { it is GameCell.EmptyCell } -> null
-            cells.all {
+            row.any { it is GameCell.EmptyCell } -> null
+            row.all {
                 it is GameCell.OccupiedCell && it.player == Player.X
             } -> GameStatus.Win(Player.X)
-            cells.all {
+
+            row.all {
                 it is GameCell.OccupiedCell && it.player == Player.O
             } -> GameStatus.Win(Player.O)
+
             else -> null
         }
     }
