@@ -25,19 +25,23 @@ class GameField(
     override fun set(rowIndex: Int, columnIndex: Int, gameCell: GameCell): Boolean {
         var result = true
         _state.update {
-            it.mapIndexed { index, currentGameCells ->
-                if (index == rowIndex) {
-                    currentGameCells.mapIndexed { index, currentGameCell ->
-                        if (index == columnIndex) {
+            it.mapIndexed { currentRowIndex, currentRow ->
+                if (currentRowIndex == rowIndex) {
+                    currentRow.mapIndexed { currentColumnIndex, currentGameCell ->
+                        if (currentColumnIndex == columnIndex) {
                             if (currentGameCell is GameCell.OccupiedCell) {
                                 result = false
                                 currentGameCell
                             } else gameCell
                         } else currentGameCell
                     }
-                } else currentGameCells
+                } else currentRow
             }
         }
         return result
+    }
+
+    override fun get(rowIndex: Int, columnIndex: Int): GameCell {
+        return _state.value[rowIndex][columnIndex]
     }
 }

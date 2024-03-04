@@ -18,8 +18,8 @@ android {
         applicationId "com.belarusianin.tic_tac_toe_mobile"
         minSdk rootProject.minSdk_version
         targetSdk rootProject.targetSdk_version
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +37,7 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     buildFeatures {
@@ -47,18 +48,20 @@ android {
         kotlinCompilerExtensionVersion compose_version
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
+    }
+    java {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(11))
     }
 }
 
 dependencies {
     implementation project(path: ':common')
     implementation project(path: ':game')
-
     /* test */
     testImplementation "junit:junit:$rootProject.junit_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"
